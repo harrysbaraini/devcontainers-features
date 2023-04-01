@@ -4,9 +4,6 @@
         "features": {
             "color": {
                 "favorite": "purple"
-            },
-            "hello": {
-                "greeting": "Greetings"
             }
         }
     }
