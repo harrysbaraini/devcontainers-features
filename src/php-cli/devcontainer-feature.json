@@ -1,0 +1,32 @@
+{
+    "name": "PHP-CLI",
+    "id": "php-cli",
+    "version": "1.0.0",
+    "description": "PHP-CLI to your dev container",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "8.2",
+                "8.1"
+            ],
+            "default": "8.2",
+            "description": "PHP version to install"
+        },
+        "packages": {
+            "type": "string",
+            "proposals": [],
+            "default": "",
+            "description": "List of packages to include. Ex: 'imagick redis gd zip'"
+        },
+        "timezone": {
+            "type": "string",
+            "proposals": ["UTC"],
+            "default": "UTC",
+            "description": "Timezone"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
