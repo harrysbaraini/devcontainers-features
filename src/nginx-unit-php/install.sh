@@ -3,8 +3,6 @@ set -e
 
 echo "Activating feature 'nginx-unit-php'"
 
-DEBIAN_FRONTEND="noninteractive"
-
 echo "The provided port is: $PORT"
 echo "The provided app root path is: $APP_ROOT"
 
@@ -20,13 +18,16 @@ echo "The effective dev container remoteUser's home directory is '$_REMOTE_USER_
 echo "The effective dev container containerUser is '$_CONTAINER_USER'"
 echo "The effective dev container containerUser's home directory is '$_CONTAINER_USER_HOME'"
 
+DEBIAN_FRONTEND="noninteractive"
+echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 # Add required apt repositories
 curl --output /usr/share/keyrings/nginx-keyring.gpg https://unit.nginx.org/keys/nginx-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/nginx-keyring.gpg] https://packages.nginx.org/unit/ubuntu/ jammy unit" > /etc/apt/sources.list.d/unit.list \
     && echo "deb-src [signed-by=/usr/share/keyrings/nginx-keyring.gpg] https://packages.nginx.org/unit/ubuntu/ jammy unit" >> /etc/apt/sources.list.d/unit.list
 
 apt-get update
-apt-get -y --no-install-recommends install \
+apt-get -yq --no-install-recommends install \
     unit \
     unit-php
 

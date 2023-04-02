@@ -31,12 +31,14 @@ COMPOSER_ALLOW_SUPERUSER=1
 COMPOSER_HOME=/composer
 COMPOSER_MAX_PARALLEL_HTTP=24
 
+echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 # timezone
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # install system dependencies
 apt-get update
-apt-get -y --no-install-recommends install \
+apt-get -yq --no-install-recommends install \
     software-properties-common \
     ca-certificates \
     curl \
@@ -49,7 +51,7 @@ add-apt-repository -y ppa:ondrej/php
 # Install PHP
 apt-get update
 
-apt-get -y --no-install-recommends install \
+apt-get -yq --no-install-recommends install \
     php${PHP_VERSION}-cli \
     php${PHP_VERSION}-common \
     php${PHP_VERSION}-igbinary \
@@ -66,7 +68,7 @@ apt-get -y --no-install-recommends install \
 
 # Install Nginx Unit and PHP extensions
 if [ -z "${PACKAGES}" ]
-    apt-get -y --no-install-recommends install ${PACKAGES}
+    apt-get -yq --no-install-recommends install ${PACKAGES}
 fi
 
 set +e
