@@ -3,6 +3,8 @@ set -e
 
 echo "Activating feature 'nginx-unit-php'"
 
+DEBIAN_FRONTEND="noninteractive"
+
 PORT=${PORT:-'80'}
 APP_ROOT=${APP_ROOT:-'/var/www/html/public'}
 echo "The provided port is: $PORT"

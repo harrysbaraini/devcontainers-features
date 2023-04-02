@@ -23,6 +23,7 @@ echo "The effective dev container containerUser is '$_CONTAINER_USER'"
 echo "The effective dev container containerUser's home directory is '$_CONTAINER_USER_HOME'"
 
 # Environment variables
+DEBIAN_FRONTEND="noninteractive"
 PHP_DATE_TIMEZONE="${TIMEZONE}"
 PHP_ERROR_REPORTING="22527"
 PHP_MEMORY_LIMIT="256M"
