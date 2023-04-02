@@ -1,5 +1,5 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
     "customizations": {
         "vscode": {
             "settings": {
@@ -13,13 +13,15 @@
                 ]
             },
             "extensions": [
-                "mads-hartmann.bash-ide-vscode"
+                "DEVSENSE.composer-php-vscode",
+                "DEVSENSE.phptools-vscode",
+                "DEVSENSE.profiler-php-vscode",
+                "mikestead.dotenv"
             ]
         }
     },
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
-    "remoteUser": "node",
-    "updateContentCommand": "npm install -g @devcontainers/cli"
+    "remoteUser": "vscode"
 }

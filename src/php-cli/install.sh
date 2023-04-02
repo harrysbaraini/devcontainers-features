@@ -51,15 +51,6 @@ add-apt-repository -y ppa:ondrej/php
 # Install PHP
 apt-get update
 
-# Install Nginx Unit and PHP extensions
-if [ -z "${PACKAGES}" ]
-packagesArr=(${PACKAGES})
-
-for pkg in "${packagesArr[@]}"
-do
-   apt-get -y --no-install-recommends install php${PHP_VERSION}-${pkg}
-done
-
 apt-get -y --no-install-recommends install \
     php${PHP_VERSION}-cli \
     php${PHP_VERSION}-common \
@@ -74,6 +65,15 @@ apt-get -y --no-install-recommends install \
     php${PHP_VERSION}-xml \
     php${PHP_VERSION}-zip \
     php${PHP_VERSION}-sqlite3
+
+# Install Nginx Unit and PHP extensions
+if [ -z "${PACKAGES}" ]; then
+    packagesArr=(${PACKAGES})
+    for pkg in "${packagesArr[@]}"
+    do
+        apt-get -y --no-install-recommends install php${PHP_VERSION}-${pkg}
+    done
+fi
 
 set +e
     PHP_SRC=$(which php)
