@@ -34,7 +34,7 @@ COMPOSER_MAX_PARALLEL_HTTP=24
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # timezone
-ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
 
 # install system dependencies
 apt-get update
