@@ -1,7 +1,7 @@
 {
     "name": "Nginx Unit",
     "id": "nginx-unit-php",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 for now.",
     "options": {
         "port": {
@@ -17,6 +17,7 @@
             "description": "Root path of the site"
         }
     },
+    "entrypoint": "/usr/local/bin/nginx-unit.sh",
     "installsAfter": [
         "ghcr.io/devcontainers/features/common-utils"
     ]

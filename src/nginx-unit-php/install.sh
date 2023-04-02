@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eux
 
 echo "Activating feature 'nginx-unit-php'"
 
@@ -18,7 +18,7 @@ echo "The effective dev container remoteUser's home directory is '$_REMOTE_USER_
 echo "The effective dev container containerUser is '$_CONTAINER_USER'"
 echo "The effective dev container containerUser's home directory is '$_CONTAINER_USER_HOME'"
 
-DEBIAN_FRONTEND="noninteractive"
+export DEBIAN_FRONTEND=noninteractive
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # Add required apt repositories
@@ -114,6 +114,8 @@ echo
 
 exec
 EOF
+
+chmod a+x /usr/local/bin/nginx-unit.sh
 
 # clean up
 rm -rf /var/lib/apt/lists/*

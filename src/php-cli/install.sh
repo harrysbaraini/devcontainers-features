@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eux
 
 echo "Activating feature 'php-cli'"
 
@@ -20,7 +20,7 @@ echo "The effective dev container containerUser is '$_CONTAINER_USER'"
 echo "The effective dev container containerUser's home directory is '$_CONTAINER_USER_HOME'"
 
 # Environment variables
-DEBIAN_FRONTEND="noninteractive"
+export DEBIAN_FRONTEND=noninteractive
 PHP_DATE_TIMEZONE="${TIMEZONE}"
 PHP_ERROR_REPORTING="22527"
 PHP_MEMORY_LIMIT="256M"
@@ -64,23 +64,15 @@ apt-get -yq --no-install-recommends install \
     php${PHP_VERSION}-bcmath \
     php${PHP_VERSION}-xml \
     php${PHP_VERSION}-zip \
-    php${PHP_VERSION}-sqlite3
-
-# Install Nginx Unit and PHP extensions
-if [ -z "${PACKAGES}" ]
-    apt-get -yq --no-install-recommends install ${PACKAGES}
-fi
-
-set +e
-    PHP_SRC=$(which php)
-set -e
+    php${PHP_VERSION}-sqlite3 \
+    ${PACKAGES}
 
 # install composer
-"${PHP_SRC}" -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 HASH="$(wget -q -O - https://composer.github.io/installer.sig)"
-"${PHP_SRC}" -r "if (hash_file('sha384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-"${PHP_SRC}" composer-setup.php --install-dir="/usr/local/bin" --filename=composer
-"${PHP_SRC}" -r "unlink('composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --install-dir="/usr/local/bin" --filename=composer
+php -r "unlink('composer-setup.php');"
 
 # clean up
 rm -rf /var/lib/apt/lists/*
