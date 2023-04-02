@@ -5,8 +5,6 @@ echo "Activating feature 'nginx-unit-php'"
 
 DEBIAN_FRONTEND="noninteractive"
 
-PORT=${PORT:-'80'}
-APP_ROOT=${APP_ROOT:-'/var/www/html/public'}
 echo "The provided port is: $PORT"
 echo "The provided app root path is: $APP_ROOT"
 
@@ -29,8 +27,8 @@ curl --output /usr/share/keyrings/nginx-keyring.gpg https://unit.nginx.org/keys/
 
 apt-get update
 apt-get -y --no-install-recommends install \
-    && unit \
-    && unit-php
+    unit \
+    unit-php
 
 # Create the config.json
 mkdir /nginx-unit
@@ -77,7 +75,7 @@ SLEEPSEC=1
 
 curl_put()
 {
-    RET=\$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @\$1 --unix-socket /var/run/control.unit.sock http://localhost/\$2)
+    RET=\$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @/nginx-unit/config.json --unix-socket /var/run/control.unit.sock http://localhost/config)
     RET_BODY=\$(echo \$RET | /bin/sed '\$ s/...\$//')
     RET_STATUS=\$(echo \$RET | /usr/bin/tail -c 4)
     if [ "\$RET_STATUS" -ne "200" ]; then
@@ -91,31 +89,29 @@ curl_put()
     return 0
 }
 
-if [ "\$1" = "unitd" ] || [ "\$1" = "unitd-debug" ]; then
-    /usr/sbin/\$1 --control unix:/var/run/control.unit.sock
+/usr/sbin/unitd --control unix:/var/run/control.unit.sock
 
-    for i in \$(/usr/bin/seq \$WAITLOOPS); do
-        if [ ! -S /var/run/control.unit.sock ]; then
-            echo "\$0: Waiting for control socket to be created..."
-            /bin/sleep \$SLEEPSEC
-        else
-            break
-        fi
-    done
+for i in \$(/usr/bin/seq \$WAITLOOPS); do
+    if [ ! -S /var/run/control.unit.sock ]; then
+        echo "\$0: Waiting for control socket to be created..."
+        /bin/sleep \$SLEEPSEC
+    else
+        break
+    fi
+done
 
-    # even when the control socket exists, it does not mean unit has finished initialisation
-    # this curl call will get a reply once unit is fully launched
-    /usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
+# even when the control socket exists, it does not mean unit has finished initialisation
+# this curl call will get a reply once unit is fully launched
+/usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
 
-    echo "\$0: Apply configuration"
-    curl_put "/nginx-unit/config.json" "config"
+echo "\$0: Apply configuration"
+curl_put "/nginx-unit/config.json" "config"
 
-    echo
-    echo "\$0: Unit initial configuration complete; Nginx Unit ready."
-    echo
-fi
+echo
+echo "\$0: Unit initial configuration complete; Nginx Unit ready."
+echo
 
-exec "$@"
+exec
 EOF
 
 # clean up

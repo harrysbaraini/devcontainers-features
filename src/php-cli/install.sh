@@ -3,9 +3,6 @@ set -e
 
 echo "Activating feature 'php-cli'"
 
-VERSION=${VERSION:-'8.2'}
-PACKAGES=${PACKAGES:-''}
-TIMEZONE=${TIMEZONE:-'UTC'}
 echo "The provided version is: $VERSION"
 echo "The provided packages are: $PACKAGES"
 echo "The provided timezone is: $TIMEZONE"
@@ -69,12 +66,7 @@ apt-get -y --no-install-recommends install \
 
 # Install Nginx Unit and PHP extensions
 if [ -z "${PACKAGES}" ]
-then
-    packagesArr=(${PACKAGES})
-    for pkg in "${packagesArr[@]}"
-    do
-        apt-get -y --no-install-recommends install php${PHP_VERSION}-${pkg}
-    done
+    apt-get -y --no-install-recommends install ${PACKAGES}
 fi
 
 set +e
