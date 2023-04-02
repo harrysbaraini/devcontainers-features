@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 echo "Activating feature 'php-cli'"
@@ -68,7 +68,8 @@ apt-get -y --no-install-recommends install \
     php${PHP_VERSION}-sqlite3
 
 # Install Nginx Unit and PHP extensions
-if [ -z "${PACKAGES}" ]; then
+if [ -z "${PACKAGES}" ]
+then
     packagesArr=(${PACKAGES})
     for pkg in "${packagesArr[@]}"
     do

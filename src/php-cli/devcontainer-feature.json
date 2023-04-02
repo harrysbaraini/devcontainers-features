@@ -1,7 +1,7 @@
 {
     "name": "PHP-CLI",
     "id": "php-cli",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "PHP-CLI to your dev container",
     "options": {
         "version": {
