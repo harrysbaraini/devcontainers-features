@@ -105,7 +105,7 @@ done
 /usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
 
 echo "\$0: Apply configuration"
-curl_put "/nginx-unit/config.json" "config"
+curl_put
 
 echo
 echo "\$0: Unit initial configuration complete; Nginx Unit ready."
