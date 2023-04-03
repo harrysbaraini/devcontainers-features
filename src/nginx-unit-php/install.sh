@@ -5,6 +5,8 @@ echo "Activating feature 'nginx-unit-php'"
 
 echo "The provided port is: $PORT"
 echo "The provided app root path is: $APP_ROOT"
+echo "The provided user/group to run unit is: $USER / $GROUP"
+echo "The provided config path is: $CONFIG_PATH"
 
 # The 'install.sh' entrypoint script is always executed as the root user.
 #
@@ -34,6 +36,7 @@ apt-get -yq --no-install-recommends install \
 # Create the config.json
 mkdir /nginx-unit
 
+if [ ! -f filename ]; then
 cat << EOF > /nginx-unit/config.json
 {
     "listeners": {
@@ -60,11 +63,13 @@ cat << EOF > /nginx-unit/config.json
         "php": {
             "type": "php",
             "root": "${APP_ROOT}/",
-            "script": "index.php"
+            "script": "index.php",
+            "user": "${_CONTAINER_USER}"
         }
     }
 }
 EOF
+fi
 
 # Create the entrypoint
 cat << EOF > /usr/local/bin/nginx-unit.sh
@@ -74,9 +79,9 @@ set -e
 WAITLOOPS=5
 SLEEPSEC=1
 
-curl_put()
+load_config()
 {
-    RET=\$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @/nginx-unit/config.json --unix-socket /var/run/control.unit.sock http://localhost/config)
+    RET=\$(/usr/bin/curl -s -w '%{http_code}' -X PUT --data-binary @/${CONFIG_PATH} --unix-socket /var/run/control.unit.sock http://localhost/config)
     RET_BODY=\$(echo \$RET | /bin/sed '\$ s/...\$//')
     RET_STATUS=\$(echo \$RET | /usr/bin/tail -c 4)
     if [ "\$RET_STATUS" -ne "200" ]; then
@@ -106,7 +111,7 @@ done
 /usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
 
 echo "\$0: Apply configuration"
-curl_put
+load_config
 
 echo
 echo "\$0: Unit initial configuration complete; Nginx Unit ready."
