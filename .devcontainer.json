@@ -1,0 +1,27 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "json.schemas": [
+                    {
+                        "fileMatch": [
+                            "*/devcontainer-feature.json"
+                        ],
+                        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+                    }
+                ]
+            },
+            "extensions": [
+                "DEVSENSE.composer-php-vscode",
+                "DEVSENSE.phptools-vscode",
+                "DEVSENSE.profiler-php-vscode",
+                "mikestead.dotenv"
+            ]
+        }
+    },
+    "features": {
+        //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "remoteUser": "vscode"
+}
