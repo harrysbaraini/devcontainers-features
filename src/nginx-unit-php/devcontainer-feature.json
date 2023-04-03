@@ -1,7 +1,7 @@
 {
     "name": "Nginx Unit",
     "id": "nginx-unit-php",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 for now.",
     "options": {
         "port": {

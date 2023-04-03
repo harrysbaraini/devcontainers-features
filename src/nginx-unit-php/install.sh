@@ -5,7 +5,6 @@ echo "Activating feature 'nginx-unit-php'"
 
 echo "The provided port is: $PORT"
 echo "The provided app root path is: $APP_ROOT"
-echo "The provided user/group to run unit is: $USER / $GROUP"
 echo "The provided config path is: $CONFIG_PATH"
 
 # The 'install.sh' entrypoint script is always executed as the root user.
