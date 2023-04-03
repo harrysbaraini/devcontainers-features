@@ -49,19 +49,19 @@ add-apt-repository -y ppa:ondrej/php
 apt-get update
 
 apt-get -yq --no-install-recommends install \
-    php${PHP_VERSION}-cli \
-    php${PHP_VERSION}-common \
-    php${PHP_VERSION}-igbinary \
-    php${PHP_VERSION}-readline \
-    php${PHP_VERSION}-curl \
-    php${PHP_VERSION}-intl \
-    php${PHP_VERSION}-curl \
-    php${PHP_VERSION}-tokenizer \
-    php${PHP_VERSION}-mbstring \
-    php${PHP_VERSION}-bcmath \
-    php${PHP_VERSION}-xml \
-    php${PHP_VERSION}-zip \
-    php${PHP_VERSION}-sqlite3 \
+    php${VERSION}-cli \
+    php${VERSION}-common \
+    php${VERSION}-igbinary \
+    php${VERSION}-readline \
+    php${VERSION}-curl \
+    php${VERSION}-intl \
+    php${VERSION}-curl \
+    php${VERSION}-tokenizer \
+    php${VERSION}-mbstring \
+    php${VERSION}-bcmath \
+    php${VERSION}-xml \
+    php${VERSION}-zip \
+    php${VERSION}-sqlite3 \
     ${PACKAGES}
 
 # install composer
