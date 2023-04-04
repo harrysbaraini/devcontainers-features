@@ -124,7 +124,6 @@ exec
 EOF
 
 chmod a+x /usr/local/bin/nginx-unit.sh
-chmod a+x /nginx-unit/generate-config.sh
 
 # clean up
 rm -rf /var/lib/apt/lists/*
