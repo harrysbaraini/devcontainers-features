@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -ex
 
 echo "Activating feature 'nginx-unit-php'"
 
