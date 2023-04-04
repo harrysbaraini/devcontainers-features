@@ -1,13 +1,13 @@
 
 # Nginx Unit (nginx-unit-php)
 
-Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 for now.
+Nginx Unit as an app server for your PHP application.
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/harrysbaraini/devcontainers-features/nginx-unit-php:1": {}
+    "ghcr.io/harrysbaraini/devcontainers-features/nginx-unit-php:2": {}
 }
 ```
 
@@ -17,6 +17,10 @@ Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 f
 |-----|-----|-----|-----|
 | port | The port to run Unit | string | 80 |
 | app_root | Root path of the site | string | /var/www/html/public |
+| config_path | A custom JSON file to load as Unit configuration. It must be exist inside the container. If not provided, the auto-generated file will be used. | string | /nginx-unit/config.json |
+| php_version | PHP version to install | string | 8.2 |
+| php_packages | List of packages to include | string | - |
+| timezone | Timezone | string | UTC |
 
 
 
