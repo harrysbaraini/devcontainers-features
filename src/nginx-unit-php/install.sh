@@ -60,7 +60,7 @@ generate_config()
                         "uri": "!/index.php"
                     },
                     "action": {
-                        "share": "${APP_ROOT}\$uri",
+                        "share": "${APP_ROOT}\\$uri",
                         "fallback": {
                             "pass": "applications/php"
                         }
