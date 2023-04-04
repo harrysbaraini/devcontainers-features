@@ -37,8 +37,6 @@ COMPOSER_MAX_PARALLEL_HTTP=24
 
 mkdir /nginx-unit
 
-add-apt-repository -y ppa:ondrej/php
-
 # install system dependencies
 
 apt-get update
@@ -55,6 +53,10 @@ apt-get -yq --no-install-recommends install \
     gnupg2
 
 # Install PHP
+
+add-apt-repository -y ppa:ondrej/php
+
+apt-get update
 
 apt-get -yq --no-install-recommends install \
     php${PHP_VERSION}-cli \
