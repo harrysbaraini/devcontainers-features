@@ -39,8 +39,6 @@ mkdir /nginx-unit
 cat << EOF > /usr/local/bin/nginx-unit.sh
 #!/bin/bash
 
-/nginx-unit/generate-config.sh
-
 set -e
 WAITLOOPS=5
 SLEEPSEC=1
