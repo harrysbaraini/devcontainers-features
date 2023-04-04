@@ -1,8 +1,8 @@
 {
     "name": "Nginx Unit",
     "id": "nginx-unit-php",
-    "version": "1.0.8",
-    "description": "Nginx Unit as an app server for your PHP 8.1 application.",
+    "version": "2.0.0",
+    "description": "Nginx Unit as an app server for your PHP application.",
     "options": {
         "port": {
             "type": "string",
@@ -21,6 +21,30 @@
             "proposals": [],
             "default": "/nginx-unit/config.json",
             "description": "A custom JSON file to load as Unit configuration. It must be exist inside the container. If not provided, the auto-generated file will be used."
+        },
+        "php_version": {
+            "type": "string",
+            "proposals": [
+                "8.2",
+                "8.1"
+            ],
+            "default": "8.2",
+            "description": "PHP version to install"
+        },
+        "php_packages": {
+            "type": "string",
+            "proposals": [
+                "php8.2-imagick php8.2-gd",
+                "php8.1-imagick php8.1-gd"
+            ],
+            "default": "",
+            "description": "List of packages to include"
+        },
+        "timezone": {
+            "type": "string",
+            "proposals": ["UTC"],
+            "default": "UTC",
+            "description": "Timezone"
         }
     },
     "entrypoint": "/usr/local/bin/nginx-unit.sh",
