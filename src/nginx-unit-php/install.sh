@@ -36,7 +36,7 @@ apt-get -yq --no-install-recommends install \
 # Create the entrypoint
 mkdir /nginx-unit
 
-cat << EOF > /usr/local/bin/nginx-unit.sh
+cat << EOFFILE > /usr/local/bin/nginx-unit.sh
 #!/bin/bash
 
 set -e
@@ -46,7 +46,7 @@ SLEEPSEC=1
 generate_config()
 {
     if [ ! -f /nginx-unit/config.json ]; then
-        cat << EOF > /nginx-unit/config.json
+        cat << EOFCONFIG > /nginx-unit/config.json
         {
             "listeners": {
                 "*:${PORT}": {
@@ -77,7 +77,7 @@ generate_config()
                 }
             }
         }
-        EOF
+EOFCONFIG
     fi
 }
 
@@ -121,7 +121,7 @@ echo "\$0: Unit initial configuration complete; Nginx Unit ready."
 echo
 
 exec
-EOF
+EOFFILE
 
 chmod a+x /usr/local/bin/nginx-unit.sh
 
