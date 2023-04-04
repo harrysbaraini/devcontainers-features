@@ -32,51 +32,56 @@ apt-get -yq --no-install-recommends install \
     unit \
     unit-php
 
-# Create the config.json
-mkdir /nginx-unit
-
-if [ ! -f filename ]; then
-cat << EOF > /nginx-unit/config.json
-{
-    "listeners": {
-        "*:80": {
-            "pass": "routes"
-        }
-    },
-
-    "routes": [
-        {
-            "match": {
-                "uri": "!/index.php"
-            },
-            "action": {
-                "share": "${APP_ROOT}\$uri",
-                "fallback": {
-                    "pass": "applications/php"
-                }
-            }
-        }
-    ],
-
-    "applications": {
-        "php": {
-            "type": "php",
-            "root": "${APP_ROOT}/",
-            "script": "index.php",
-            "user": "${_REMOTE_USER}"
-        }
-    }
-}
-EOF
-fi
 
 # Create the entrypoint
+mkdir /nginx-unit
+
 cat << EOF > /usr/local/bin/nginx-unit.sh
 #!/bin/bash
+
+/nginx-unit/generate-config.sh
 
 set -e
 WAITLOOPS=5
 SLEEPSEC=1
+
+generate_config()
+{
+    if [ ! -f /nginx-unit/config.json ]; then
+        cat << EOF > /nginx-unit/config.json
+        {
+            "listeners": {
+                "*:${PORT}": {
+                    "pass": "routes"
+                }
+            },
+
+            "routes": [
+                {
+                    "match": {
+                        "uri": "!/index.php"
+                    },
+                    "action": {
+                        "share": "${APP_ROOT}\$uri",
+                        "fallback": {
+                            "pass": "applications/php"
+                        }
+                    }
+                }
+            ],
+
+            "applications": {
+                "php": {
+                    "type": "php",
+                    "root": "${APP_ROOT}/",
+                    "script": "index.php",
+                    "user": "${_REMOTE_USER}"
+                }
+            }
+        }
+        EOF
+    fi
+}
 
 load_config()
 {
@@ -110,6 +115,7 @@ done
 /usr/bin/curl -s -X GET --unix-socket /var/run/control.unit.sock http://localhost/
 
 echo "\$0: Apply configuration"
+generate_config
 load_config
 
 echo
@@ -120,6 +126,7 @@ exec
 EOF
 
 chmod a+x /usr/local/bin/nginx-unit.sh
+chmod a+x /nginx-unit/generate-config.sh
 
 # clean up
 rm -rf /var/lib/apt/lists/*
