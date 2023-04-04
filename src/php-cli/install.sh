@@ -35,34 +35,24 @@ echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # install system dependencies
 apt-get update
-apt-get -yq --no-install-recommends install \
+apt-get -y --no-install-recommends install \
     software-properties-common \
     ca-certificates \
     curl \
     unzip \
-    gnupg2
+    gnupg2 \
+    wget
 
 # Add required repository
 add-apt-repository -y ppa:ondrej/php
-
-# Install PHP
 apt-get update
 
-apt-get -yq --no-install-recommends install \
-    php${VERSION}-cli \
-    php${VERSION}-common \
-    php${VERSION}-igbinary \
-    php${VERSION}-readline \
-    php${VERSION}-curl \
-    php${VERSION}-intl \
-    php${VERSION}-curl \
-    php${VERSION}-tokenizer \
-    php${VERSION}-mbstring \
-    php${VERSION}-bcmath \
-    php${VERSION}-xml \
-    php${VERSION}-zip \
-    php${VERSION}-sqlite3 \
-    ${PACKAGES}
+# Install PHP
+apt-get -y --no-install-recommends install php${VERSION}-{cli,common,igbinary,readline,curl,intl,curl,mbstring,bcmath,xml,zip,sqlite3}
+
+if [ -z "${PACKAGES}" ]; then
+    apt-get -y --no-install-recomends install php${VERSION}-{$PACKAGES}
+fi
 
 # install composer
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

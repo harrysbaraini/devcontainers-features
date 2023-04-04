@@ -1,7 +1,7 @@
 {
     "name": "PHP-CLI",
     "id": "php-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "PHP-CLI to your dev container",
     "options": {
         "version": {
@@ -16,10 +16,10 @@
         "packages": {
             "type": "string",
             "proposals": [
-                "php8.2-imagick php8.2-gd"
+                "imagick,gd"
             ],
             "default": "",
-            "description": "List of packages to include"
+            "description": "List of packages to install, separated by comma and no spaces between them."
         },
         "timezone": {
             "type": "string",

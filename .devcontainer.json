@@ -21,7 +21,14 @@
         }
     },
     "features": {
-        //"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "./src/php-cli": {
+            "version": "8.2",
+            "packages": "php8.2-gd php8.2-imagick"
+        }
+        // "./src/nginx-unit-php": {
+        //     "port": "80",
+        //     "app_root": "\$PWD/public"
+        // }
     },
     "remoteUser": "vscode"
 }
