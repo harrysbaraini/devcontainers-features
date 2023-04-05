@@ -1,0 +1,30 @@
+{
+    "name": "Nginx Unit",
+    "id": "nginx-unit-php",
+    "version": "1.0.0",
+    "description": "Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 for now.",
+    "options": {
+        "port": {
+            "type": "string",
+            "proposals": ["80"],
+            "default": "80",
+            "description": "The port to run Unit"
+        },
+        "app_root": {
+            "type": "string",
+            "proposals": [],
+            "default": "${workspaceFolder}/public",
+            "description": "Root path of the site. Defaults to ${workspaceFolder}/public,"
+        },
+        "config_path": {
+            "type": "string",
+            "proposals": [],
+            "default": "/nginx-unit/config.json",
+            "description": "A custom JSON file to load as Unit configuration. It must be exist inside the container. If not provided, the auto-generated file will be used."
+        }
+    },
+    "entrypoint": "/usr/local/bin/nginx-unit.sh",
+    "installsAfter": [
+        "../php-cli"
+    ]
+}

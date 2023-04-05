@@ -1,0 +1,34 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "json.schemas": [
+                    {
+                        "fileMatch": [
+                            "*/devcontainer-feature.json"
+                        ],
+                        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+                    }
+                ]
+            },
+            "extensions": [
+                "DEVSENSE.composer-php-vscode",
+                "DEVSENSE.phptools-vscode",
+                "DEVSENSE.profiler-php-vscode",
+                "mikestead.dotenv"
+            ]
+        }
+    },
+    "features": {
+        "./src/php-cli": {
+            "version": "8.2",
+            "packages": "php8.2-gd php8.2-imagick"
+        }
+        // "./src/nginx-unit-php": {
+        //     "port": "80",
+        //     "app_root": "\$PWD/public"
+        // }
+    },
+    "remoteUser": "vscode"
+}
