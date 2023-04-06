@@ -1,0 +1,10 @@
+{
+    "name": "Just Script Runner",
+    "id": "just",
+    "version": "1.0.0",
+    "description": "Install Just to run justfile definitions",
+    "options": {},
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

@@ -49,6 +49,20 @@ it really shines at how easy it's to configure. I didn't benchmark Unit against 
 }
 ```
 
+### `just`
+
+Install [Just](https://github.com/casey/just), the script runner.
+
+```jsonc
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        // Other features...
+        "ghcr.io/harrysbaraini/devcontainers-features/just": {}
+    }
+}
+```
+
 ## A Laravel Example
 
 ```jsonc
