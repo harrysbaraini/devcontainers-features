@@ -16,7 +16,8 @@ Nginx Unit as an app server for your PHP application. SUPPORT FOR UBUNTU 22.04 f
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | port | The port to run Unit | string | 80 |
-| app_root | Root path of the site | string | /var/www/html/public |
+| app_root | Root path of the site. Defaults to ${workspaceFolder}/public, | string | ${workspaceFolder}/public |
+| config_path | A custom JSON file to load as Unit configuration. It must be exist inside the container. If not provided, the auto-generated file will be used. | string | /nginx-unit/config.json |
 
 
 
