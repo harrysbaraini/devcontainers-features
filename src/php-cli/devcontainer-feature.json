@@ -16,7 +16,7 @@
         "packages": {
             "type": "string",
             "proposals": [
-                "imagick,gd"
+                "php8.1-imagick php8.1-gd"
             ],
             "default": "",
             "description": "List of packages to install, separated by comma and no spaces between them."

@@ -49,10 +49,11 @@ add-apt-repository -y ppa:ondrej/php
 apt-get update
 
 # Install PHP
-apt-get -y --no-install-recommends install php${VERSION}-{cli,common,igbinary,readline,curl,intl,curl,mbstring,bcmath,xml,zip,sqlite3}
+apt-get -y --no-install-recommends install php$VERSION-{cli,common,igbinary,readline,curl,intl,curl,mbstring,bcmath,xml,zip,sqlite3}
 
 if [ ! -z "$PACKAGES" ]; then
-    apt-get -y --no-install-recomends install php${VERSION}-{$PACKAGES}
+    echo "Installing $PACKAGES"
+    apt-get -y --no-install-recommends install $PACKAGES
 fi
 
 # install composer

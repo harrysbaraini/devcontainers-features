@@ -75,7 +75,7 @@ Install [Just](https://github.com/casey/just), the script runner.
 	"features": {
 		"./devcontainers-features/src/php-cli": {
             "version": "8.2",
-            "packages": "imagick,gd"
+            "packages": "php8.2-imagick php8.2-gd"
         },
         "./devcontainers-features/src/nginx-unit-php": {
             // "app_root" could be omitted as this is the default app_root value.
