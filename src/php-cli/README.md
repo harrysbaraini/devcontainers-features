@@ -16,7 +16,7 @@ PHP-CLI to your dev container
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | PHP version to install | string | 8.2 |
-| packages | List of packages to include | string | - |
+| packages | List of packages to install, separated by comma and no spaces between them. | string | - |
 | timezone | Timezone | string | UTC |
 
 

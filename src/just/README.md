@@ -1,13 +1,13 @@
 
-# PHP-CLI (php-cli)
+# Just Script Runner (just)
 
-PHP-CLI to your dev container
+Install Just to run justfile definitions
 
 ## Example Usage
 
 ```json
 "features": {
-    "ghcr.io/harrysbaraini/devcontainers-features/php-cli:1": {}
+    "ghcr.io/harrysbaraini/devcontainers-features/just:1": {}
 }
 ```
 
@@ -15,12 +15,10 @@ PHP-CLI to your dev container
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | PHP version to install | string | 8.2 |
-| packages | List of packages to include | string | - |
-| timezone | Timezone | string | UTC |
+
 
 
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/harrysbaraini/devcontainers-features/blob/main/src/php-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/harrysbaraini/devcontainers-features/blob/main/src/just/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
