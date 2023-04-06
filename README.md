@@ -18,7 +18,7 @@ This feature will install PHP CLI inside the built container. Microsoft provides
     "features": {
         "ghcr.io/harrysbaraini/devcontainers-features/php-cli": {
             "version": "8.2",
-            "packages": "imagick,gd,sodium"
+            "packages": "php8.2-imagick php8.2-gd php8.2-sodium"
         }
     }
 }
